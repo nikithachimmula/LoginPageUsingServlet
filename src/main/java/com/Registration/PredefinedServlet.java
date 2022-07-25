@@ -18,15 +18,15 @@ import java.io.PrintWriter;
           @WebInitParam(name = "password", value = "Nicky@987")
   }
   )
-
-    public class PredefinedServlet extends HttpServlet {
-
+  public class PredefinedServlet extends HttpServlet {
       @Override
       protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-          String userIdInput = req.getParameter("user");
-          String passwordInput = req.getParameter("password");
+          String userIdInput = req.getParameter("userInput");
+          String passwordInput = req.getParameter("pwdInput");
+          String userID = getServletConfig().getInitParameter("user");
+          String password = getServletConfig().getInitParameter("password");
 
-          if (userIdInput.matches("User") && passwordInput.matches("password")) {
+          if (userID.equals(userIdInput) && password.equals(passwordInput)) {
               req.setAttribute("user", userIdInput);
               req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
           } else {
@@ -37,4 +37,3 @@ import java.io.PrintWriter;
           }
       }
   }
-
